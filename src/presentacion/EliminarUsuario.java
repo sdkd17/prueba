@@ -12,13 +12,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+
+import excepciones.UsuarioNoExisteException;
+
 import java.awt.FlowLayout;
 
 public class EliminarUsuario extends JInternalFrame {
 
 	private IControladorUsuario controlUsr;
-	private JTextField textFieldNombre;
+	private JTextField textFieldCedula;
 
 	/**
 	 * Create the frame.
@@ -40,15 +44,18 @@ public class EliminarUsuario extends JInternalFrame {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				//operar con el icu
+				String ci = textFieldCedula.getText();
+				eliminarUsuario(ci);
+				
 			}
 		});
 		
-		JLabel labelNombre = new JLabel("Ingresar Nombre:");
-		panelNorte.add(labelNombre);
+		JLabel labelCedula = new JLabel("Ingresar cedula:");
+		panelNorte.add(labelCedula);
 		
-		textFieldNombre = new JTextField();
-		panelNorte.add(textFieldNombre);
-		textFieldNombre.setColumns(10);
+		textFieldCedula = new JTextField();
+		panelNorte.add(textFieldCedula);
+		textFieldCedula.setColumns(10);
 		btnEliminar.setToolTipText("Elimina el usuario ingresado si existe en el sistema");
 		panelNorte.add(btnEliminar);
 		
@@ -61,9 +68,10 @@ public class EliminarUsuario extends JInternalFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				//Cerrar la ventana
-				
+				cerrarVentana();
+				limpiarFormulario();
 			}
+				
 		});
 		panelSur.add(btnNewButton_1);
 		
@@ -71,7 +79,8 @@ public class EliminarUsuario extends JInternalFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-					// Cerrar la ventana
+				cerrarVentana();
+				limpiarFormulario();
 			}
 		});
 		panelSur.add(btnNewButton);
@@ -79,6 +88,30 @@ public class EliminarUsuario extends JInternalFrame {
 		controlUsr = icu;
 		
 		
+		
+	}
+	
+	private void limpiarFormulario() {
+		textFieldCedula.setText("");
+	}
+	
+	private void cerrarVentana(){
+		limpiarFormulario();
+		this.setVisible(false);
 	}
 
+	private void eliminarUsuario(String ci){
+		
+		try{
+			controlUsr.eliminarUsuario(ci);
+			JOptionPane.showMessageDialog(this, "Se elimino el usuario " + ci + " en el sistema", "Eliminar Usuario",
+	                JOptionPane.INFORMATION_MESSAGE);
+		}catch(UsuarioNoExisteException e ){
+			JOptionPane.showMessageDialog(this, "El Usuario no existe en el sistema", "Eliminar Usuario",
+	                JOptionPane.INFORMATION_MESSAGE);
+		};
+		
+		
+		
+	}
 }

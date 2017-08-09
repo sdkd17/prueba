@@ -18,6 +18,14 @@ public interface IControladorUsuario {
      */
     public abstract void registrarUsuario(String n, String ap, String ci) throws UsuarioRepetidoException;
 
+    
+    /**
+     * Elimina al usuario en el sistema.
+     * @param ci cedula del usuario a eliminar
+     * @throws UsuarioNoExisteException Si la cédula del usuario no se encuentra registrada en el sistema.
+     */
+    public abstract void  eliminarUsuario(String ci) throws UsuarioNoExisteException;
+    
     /**
      * Retorna la información de un usuario con la cédula indicada.
      * @param ci Cédula del usuario.

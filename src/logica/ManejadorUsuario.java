@@ -29,7 +29,12 @@ public class ManejadorUsuario {
         String ci = usu.getCedulaIdentidad();
         usuariosCI.put(ci, usu);
     }
-
+    
+    //defino metodo
+    public void removeUsuario(String ci){
+    	usuariosCI.remove(ci);
+    }
+    
     public Usuario obtenerUsuario(String ci) {
         return ((Usuario) usuariosCI.get(ci));
     }

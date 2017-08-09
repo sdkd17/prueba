@@ -25,6 +25,7 @@ public class Principal {
     private CrearUsuario creUsrInternalFrame;
     private ConsultarUsuario conUsrInternalFrame;
     private ListaUsuarios lisUsrInternalFrame;
+    private EliminarUsuario elimUsrInternalFrame;
 
     /**
      * Launch the application.
@@ -64,7 +65,12 @@ public class Principal {
         lisUsrInternalFrame = new ListaUsuarios(ICU);
         lisUsrInternalFrame.setVisible(false);
         frmGestionDeUsuarios.getContentPane().setLayout(null);
-
+        
+        //Creo el internal frame para eliminarUsuario y lo agrego al frame principal
+        elimUsrInternalFrame = new EliminarUsuario(ICU);
+        elimUsrInternalFrame.setVisible(false);
+        frmGestionDeUsuarios.getContentPane().add(elimUsrInternalFrame);
+        
         frmGestionDeUsuarios.getContentPane().add(conUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(creUsrInternalFrame);
         frmGestionDeUsuarios.getContentPane().add(lisUsrInternalFrame);
@@ -131,5 +137,15 @@ public class Principal {
             }
         });
         menuUsuarios.add(mntmListaUsuarios);
+        
+        //Agrego opcion en el menu para EliminarUsuario
+        JMenuItem mntmEliminarUsuario = new JMenuItem("EliminarUsuario");
+        mntmEliminarUsuario .addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e){
+        		//Muestro el InternalFrame para ver la venta de eliminar usuarios
+        		elimUsrInternalFrame.setVisible(true);
+        	}
+        });
+        menuUsuarios.add(mntmEliminarUsuario);
     }
 }

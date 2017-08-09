@@ -26,11 +26,12 @@ public class ControladorUsuario implements IControladorUsuario {
     public void eliminarUsuario(String ci) throws UsuarioNoExisteException {
     	ManejadorUsuario mu = ManejadorUsuario.getinstance();
     	Usuario u = mu.obtenerUsuario(ci);
-    	if( u == null){
-    		throw new UsuarioNoExisteException("El usuario " + ci + " no existe en el sistema");
-    	}
     	
-    	mu.removeUsuario(ci);
+    	if( u != null){
+    		mu.removeUsuario(ci);
+    	}else
+    		throw new UsuarioNoExisteException("El usuario " + ci + " no existe en el sistema");
+    	
     }
     
     public DataUsuario verInfoUsuario(String ci) throws UsuarioNoExisteException {

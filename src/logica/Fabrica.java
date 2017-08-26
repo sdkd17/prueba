@@ -8,6 +8,9 @@ package logica;
  */
 public class Fabrica {
 
+	/***********************************
+	 * 			Es Singleton
+	 ***********************************/
     private static Fabrica instancia;
 
     private Fabrica() {
@@ -23,5 +26,5 @@ public class Fabrica {
     public IControladorUsuario getIControladorUsuario() {
         return new ControladorUsuario();
     }
-//.........................................................
+//......................................................... 
 }

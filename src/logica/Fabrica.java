@@ -23,10 +23,11 @@ public class Fabrica {
         return instancia;
     }
     
+    //Me quedo con el local
     public static Fabrica getInstance() {
         return new Fabrica();
     }
-    
+
     //.........................................................
 
     public IControladorUsuario getIControladorUsuario() {

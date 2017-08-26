@@ -22,6 +22,7 @@ public class Fabrica {
         }
         return instancia;
     }
+    //.........................................................
 
     public IControladorUsuario getIControladorUsuario() {
         return new ControladorUsuario();
